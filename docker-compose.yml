@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  server:
+    build:
+      context: ./server
+      args:
+        UID: ${USER_ID}
+        GID: ${GROUP_ID}
+    container_name: sass_server
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./data/www:/home/serveruser/vhosts:delegated
+    networks:
+      sass_net:
+  tools:
+    build:
+      context: ./tools
+      args:
+        UID: ${USER_ID}
+        GID: ${GROUP_ID}
+    container_name: sass_tools
+    volumes:
+      - ./data/www:/home/serveruser/vhosts:delegated
+    networks:
+      sass_net:
+networks:
+  sass_net:

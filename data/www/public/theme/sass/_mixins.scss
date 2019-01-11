@@ -1,0 +1,3 @@
+@mixin transition-mixin($property, $time) {
+    transition: $property $time ease-in-out;
+}
